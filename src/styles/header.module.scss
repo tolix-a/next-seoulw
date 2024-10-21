@@ -1,0 +1,159 @@
+// 뒤로 가기 버튼
+.btnWrapCommon{
+  position: relative;
+  .goBackBtnWrap{
+    top: 50%;
+    left: 20px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    .goBackBtn {
+      &::before {
+        width: 24px;
+        height: 24px;
+        display: block;
+        content: "";
+        background: url("../../public/assets/icons/arrow_left.svg");
+      }
+    }
+  }
+}
+.goBackBtn1{
+  &::before {
+    width: 24px;
+    height: 24px;
+    display: block;
+    content: "";
+    background: url("../../public/assets/icons/arrow_left.svg");
+  }
+}
+
+
+// 메인 헤더
+.mainHeaderWrap {
+  max-width: 480px;
+  height: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &.hide{
+    display: none;
+  }
+  h1 {
+    // width: 128px;
+    // height: 35px;
+    // background: url("../../public/logo.svg") center no-repeat;
+    // cursor: pointer;
+  }
+  .btnWrap {
+    button {
+      &::after {
+        width: 32px;
+        height: 32px;
+        display: block;
+        // position: relative;
+      }
+    }
+    .search {
+      margin-right: 12px;
+      &::after {
+        // width: 32px;
+        // height: 32px;
+        // display: block;
+        content: "";
+        background: url("../../public/assets/icons/search.svg") center
+          no-repeat;
+      }
+    }
+    .myPage {
+      &::after {
+        // width: 32px;
+        // height: 32px;
+        // display: block;
+        content: "";
+        background: url("../../public/assets/icons/person.svg") center
+          no-repeat;
+      }
+    }    
+  }
+}
+
+// 서브 헤더
+.subHeaderWrap {
+  max-width: 480px;
+  height: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .subtitle {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+
+  }
+}
+
+// 디테일 헤더
+.detailHeaderWrap{
+  max-width: 480px;
+  height: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  .itemTitle{
+    width: 360px;
+    margin-left: 32px;
+    font-size: 20px;
+    display: -webkit-box; /* Flexbox를 사용할 때 */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* 줄 수 설정 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 생략 기호(...) 표시 */
+    
+  }
+
+}
+
+// 검색 헤더
+.searchWrap {
+  max-width: 480px;
+  height: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  form {
+    display: flex;
+    width: 400px;
+    height: 50px;
+    padding: 0 18px;
+    background-color: #e8e8e8;
+    border-radius: 99px;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 320px;
+      height: 30px;
+      background-color: transparent;
+      &::placeholder {
+        color: #a4a4a4;
+        font-size: 18px;
+      }
+      &:-webkit-autofill {
+        background-color: transparent;
+      }
+    }
+    button {
+      width: 30px;
+      height: 30px;
+      background: url("../../public/assets/icons/search.svg");
+    }
+  }
+}
+

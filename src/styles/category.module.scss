@@ -1,0 +1,55 @@
+
+.selected{
+   color: #FF4B77;
+}
+
+.category{
+   margin-top: 80px;
+   .genresTapBarWrap{
+      margin-left: 20px;
+   }
+   >ul{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #CBCBCB;
+      padding: 0 20px;
+      margin-top: 41px;
+      li{
+         display: flex;
+         flex-direction: column;
+         button{
+            color: black;
+         }
+         div{
+            width: 95px;
+            padding-top: 11px;
+         }
+      }
+      .selected{
+         button{
+            color: #FF4B77;
+            font-weight: bold;
+         }
+         div{
+            border-bottom: 3px solid #FF4B77;
+         }
+      }
+
+   }
+   >section{
+      margin-top: 49px;
+      margin-bottom: 150px;
+      .grid{
+         display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         grid-gap: 20px;
+         padding: 0 20px;
+      }
+      .nogongyeon{
+         font-size: 24px;
+         color: #AFAFAF;
+         text-align: center;
+         margin-top: 30px;
+      }
+   }
+}

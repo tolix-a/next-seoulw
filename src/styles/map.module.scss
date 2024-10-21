@@ -1,0 +1,36 @@
+.map {
+    display: flex;
+    margin: 20px 0 20px 20px;
+    h2 {
+      font-size: 20px; // 제목 크기 설정
+      font-weight: bold; // 두껍게 설정
+      margin-right: 20px;
+      margin-bottom: 30px;
+    }
+    .mapinfo{
+        a{
+            padding: 5px 0px;
+        }
+
+        p {
+          margin: 5px 0; // 문단 간격 설정
+          font-size: 16px; // 기본 폰트 크기
+          line-height: 1.5; // 줄 간격 설정
+          color: #333; // 텍스트 색상
+        }
+    
+        p:last-child {
+          color: #007bff; // 전화번호 색상
+          text-decoration: underline; // 밑줄 추가
+          cursor: pointer; // 포인터 커서 추가
+        }
+
+
+    }
+
+    .mapnum {
+      display: flex;
+      gap: 20px;
+      margin-top: 17px;
+    }
+  }

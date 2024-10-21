@@ -1,0 +1,49 @@
+
+.bookpage{
+   padding: 0 20px;
+   >div{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      p{
+         font-weight: 600;
+         span{
+            color: #6F6F6F;
+         }
+      }
+   }
+   >ul{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      li{
+         position: relative;
+         margin-bottom: 10px;
+         img{
+            height: 159px;
+            border-radius: 10px;
+         }
+         p{
+            color: black;
+            padding-top: 14px;
+            text-align: center;
+            font-weight: 500;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+         }
+         button{
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            img{
+               width: 21px;
+               height: 17px;
+            }
+         }
+      }
+   }
+}

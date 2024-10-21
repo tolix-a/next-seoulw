@@ -1,0 +1,35 @@
+.errorWrap{
+    width: 100%;
+    height: 100vh;
+    // min-height: 480px;
+    // margin: 0 auto;
+    // text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+
+    .title{
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .errorMsgWrap{
+        text-align: center;
+        margin: 40px 0;
+        p{
+            color: #8e8e8e;
+            &:not(:last-of-type){
+                margin-bottom: 4px;
+            }
+        }
+    }
+    button{
+        padding: 10px 20px; // 버튼 패딩
+        font-size: 16px; // 버튼 폰트 크기
+        color: #fff; // 글자 색상
+        background-color: #ff4b77; // 버튼 배경색
+        border-radius: 5px; 
+        cursor: pointer; // 커서 포인터로 변경
+    }
+}

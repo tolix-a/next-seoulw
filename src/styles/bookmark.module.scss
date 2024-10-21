@@ -1,0 +1,48 @@
+.all{
+    padding: 20px;
+.list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.listflex {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+
+  .listinfo {
+    width: 130px;
+    height: auto; /* 높이를 자동으로 설정하여 내용에 맞게 조절 */
+    position: relative;
+
+    img {
+      width: 100%; /* 이미지가 부모 요소의 너비에 맞게 조정 */
+      height: auto; /* 비율을 유지하며 높이를 자동 조정 */
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    p {
+      margin: 8px 0 0; /* 위쪽 여백을 추가하여 이미지와의 간격 조정 */
+    }
+
+    .like {
+      &::after {
+        width: 24px;
+        height: 24px;
+        display: block;
+        content: "";
+        position: absolute;
+        top: 8px; /* 상단 여백 조정 */
+        right: 8px; /* 우측 여백 조정 */
+        background: url("../../public/assets/icons/heart.svg") center no-repeat;
+      }
+      &.active {
+        &::after {
+          background-image: url("../../public/assets/icons/heart_pink.svg");
+        }
+      }
+    }
+  }
+}
+}

@@ -1,0 +1,38 @@
+.genresTapBar{
+    span{
+        height: 42px;
+        padding: 8px 20px;
+        display: block;
+        background-color: #ffffff;
+        border: 1px solid #CBCBCB;
+        border-radius: 99px;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        &.active{
+            color: #ffffff;
+            border: none;
+            background-color: #FF4B77;
+            font-weight: 700;
+        }
+    }
+    .genresSwiper{
+        .genresBtnsSlide{
+            .genresBtn{
+                padding: 8px 20px;
+                background-color: #ffffff;
+                border: 1px solid #CBCBCB;
+                border-radius: 99px;
+                overflow: hidden;
+                white-space: nowrap;
+                
+                &.active{
+                    color: #ffffff;
+                    border: none;
+                    background-color: #FF4B77;
+                    font-weight: 700;
+                }
+            }
+        }       
+    }
+}

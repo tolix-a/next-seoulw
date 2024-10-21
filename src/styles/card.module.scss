@@ -1,0 +1,103 @@
+.cardWrap{
+    width: 210px;
+    figure{
+        cursor: pointer;
+        .imgWrap{
+            width: 210px;
+            height: 240px;
+            margin-bottom: 22px;
+            border-radius: 10px;
+            background-color: #efefef;
+            overflow: hidden;
+            position: relative;
+            .like{
+                &::after{
+                    width: 24px;
+                    height: 24px;
+                    margin: 8px;
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    background: url('../../public/assets/icons/heart.svg') center no-repeat;
+                }
+                &.active{
+                    &::after{
+                        background-image: url('../../public/assets/icons/heart_pink.svg');
+                    }
+                }
+            }
+        }
+        .imgDescription{
+            text-align: center;
+            .status{
+                &::after{
+                    width: 64px;
+                    height: 22px;
+                    padding: 0 8px;
+                    margin: 0 auto;
+                    display: block;
+                    box-sizing: border-box;
+                    font-size: 12px;
+                    font-weight: 700;
+                    border: 1px solid;
+                    border-radius: 20px;
+                    white-space: nowrap;
+                }
+                &.upcoming{
+                    &::after{
+                        content: '공연 예정';
+                        color: #0D326F;
+                        border-color: #0D326F;
+                    }
+
+                }
+                &.ongoing{
+                    &::after{
+                        content: '공연중';
+                        color: #FF4B77;
+                        border-color: #FF4B77;
+                    }
+                }
+                &.ended{
+                    &::after{
+                        content: '공연 완료';
+                        color: #8E8E8E;
+                        border-color: #8E8E8E;
+                    }
+                }
+            }
+            .title{
+                padding: 0 20px;
+                margin: 16px 0 8px;
+                font-weight: 700;
+
+                display: -webkit-box; /* Flexbox를 사용할 때 */
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2; /* 줄 수 설정 */
+                overflow: hidden;
+                text-overflow: ellipsis; /* 생략 기호(...) 표시 */
+            }
+            ul{
+                .venue{
+                    width: 80%;
+                    margin: 0 auto;
+                    font-size: 14px;
+                    
+                    display: -webkit-box; /* Flexbox를 사용할 때 */
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1; /* 줄 수 설정 */
+                    overflow: hidden;
+                    text-overflow: ellipsis; /* 생략 기호(...) 표시 */
+                }
+                .date{
+                    font-size: 12px;
+                    color: #8e8e8e;
+                }
+            }
+        }
+
+    }
+
+}

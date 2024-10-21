@@ -1,0 +1,126 @@
+/* :root{
+   --pink: #FF4B77;
+   --blue: #0D326F;
+   --red: #FF0F0F;   
+   --b6: #6F6F6F;
+   --b8: #8E8E8E;
+   --ba: #ABABAB;
+   --bc: #CBCBCB;
+} */
+
+.search{
+   margin-top: 110px;
+   padding-left: 20px;
+   h2{
+      font-size: 24px;
+      font-weight: bold;
+      padding-bottom: 20px;
+      span{
+         color: #FF4B77;
+         font-size: 20px;
+      }
+   }
+   >ul{
+      gap: 26px;
+      height: 158px;
+      li{
+         padding-top: 20px;
+         position: relative;
+         p{
+            color: #FF4B77;
+            padding: 9.5px 30px;
+            border: 1px solid #FF4B77;
+            border-radius: 50px;
+            cursor: pointer;
+         }
+         button{
+            position: absolute;
+            top: 8px;
+            right: -10px;
+            z-index: 2;
+            img{
+               width: 28px;
+               height: 28px;
+            }
+         }
+      }
+      >div{
+         display: flex;
+         justify-content: center;
+         >p{
+            padding-top: 45px;
+            font-size: 18px;
+            color: #A4A4A4;
+         }
+      }
+   }
+   >section{
+      figure{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+         cursor: pointer;
+         
+         padding-top: 15px;
+         position: relative;
+         img{
+            width: 130px;
+            height: 160px;
+            border-radius: 10px;
+         }
+         p{
+            margin-top: 20px;
+            color: #666;
+         }
+         figcaption{
+            color: black;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+         }
+         button{
+            img{
+               position: absolute;
+               width: 28px;
+               height: 28px;
+               top: 2%;
+               right: -10%;
+            }
+         }
+      }
+      >div{
+         display: flex;
+         justify-content: center;
+         >p{
+            padding-top: 45px;
+            font-size: 18px;
+            color: #A4A4A4;
+         }
+      }
+   }
+   .thousand{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 100px;
+      padding: 0 20px;
+      >figure{
+         display: flex;
+         justify-content: center;
+      }
+   }
+   >.none{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 30%;
+      padding-bottom: 40%;
+      >p{
+         font-size: 24px;
+         color: #AFAFAF;
+      }
+   }
+}
