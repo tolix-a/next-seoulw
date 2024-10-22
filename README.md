@@ -1,8 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Seoul, W
 
-First, run the development server:
+KOPIS API를 이용해서 팀프로젝트로 만든 웹 앱입니다.
+Seoul, W는 서울 내 공연 정보를 보여주며 장르별, 이번주, 공연 예정작들을 찾을 수 있습니다.
+검색 기능이 있고 로그인 후 북마크와 후기를 남기실 수 있습니다.
 
 ```bash
 npm run dev

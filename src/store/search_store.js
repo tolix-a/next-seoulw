@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { create } from "zustand";
 
 
@@ -30,9 +29,7 @@ const useSearchStore = create((set) => ({
   }),
 
   readCookie : () => set(() => {
-    // if (typeof document !== 'undefined') {
-      const cookievalue = document.cookie.split('; ').find(row => row.startsWith('results='));
-    // }
+    const cookievalue = document.cookie.split(';').find(row => row.includes('results='));
     if (cookievalue) {
       return {results: JSON.parse(cookievalue.split('=')[1]) || [] };
     } else {
@@ -41,15 +38,15 @@ const useSearchStore = create((set) => ({
   }),
 
   deleteC: (value) => {
-    const cookievalue = document.cookie.split(';').find(row => row.startsWith('results='))
+    const cookievalue = document.cookie.split(';').find(row => row.includes('results=')).trim()
     let results = [];
 
     if (cookievalue) {
       results = JSON.parse(cookievalue.split('=')[1]) || [];
+      const updatedR = results.filter(result => result.value !== value);
+      document.cookie = `results=${JSON.stringify(updatedR)}; path=/;`
+      set({ results: updatedR});
     }
-    const updatedR = results.filter(result => result.value !== value);
-    document.cookie = `results=${JSON.stringify(updatedR)}; path=/;`
-    set({ results: updatedR});
   },
 
 
@@ -57,14 +54,13 @@ const useSearchStore = create((set) => ({
   // 최근 본 공연 관련 상태
   recentPerformances: [],
   setRecentPerformance: (performance) => set((state) => {
-    // const updatedPerformances = [...state.recentPerformances, performance];
     const updatedPerformances = state.recentPerformances.filter(
       (p) => p.mt20id !== performance.mt20id // mt20id를 기준으로 중복 제거
     );
-      // 최신 공연을 맨 앞에 추가
+    
     updatedPerformances.push(performance);
     if (updatedPerformances.length > 10) {
-      updatedPerformances.pop(); // 가장 오래된 것을 제거
+      updatedPerformances.pop();
     }
 
     document.cookie = `recentPerformances=${JSON.stringify(updatedPerformances)}; path=/;`;
@@ -72,7 +68,7 @@ const useSearchStore = create((set) => ({
   }),
 
   readCookie2: () => set(() => {
-    const cookievalue = document.cookie.split('; ').find(row => row.startsWith('recentPerformances='));
+    const cookievalue = document.cookie.split(';').find(row => row.includes('recentPerformances='));
     if (cookievalue) {
       return { recentPerformances: JSON.parse(cookievalue.split('=')[1]) || [] };
     } else {
@@ -81,14 +77,15 @@ const useSearchStore = create((set) => ({
   }),
 
   deleteX: (mt20id) => {
-    const cookievalue = document.cookie.split(';').find(row => row.startsWith('recentPerformances='));
+    const cookievalue = document.cookie.split(';').find(row => row.includes('recentPerformances='));
     let performances = [];
+    
     if (cookievalue) {
       performances = JSON.parse(cookievalue.split('=')[1]) || [];
+      const updatedPer = performances.filter(performance => performance.mt20id !== mt20id);
+      document.cookie = `recentPerformances=${JSON.stringify(updatedPer)}; path=/;`;
+      set({ recentPerformances: updatedPer });
     }
-    const updatedPer = performances.filter(performance => performance.mt20id !== mt20id);
-    document.cookie = `recentPerformances=${JSON.stringify(updatedPer)}; path=/;`;
-    set({ recentPerformances: updatedPer });
   }
 }));
 

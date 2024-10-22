@@ -157,17 +157,14 @@ const HeaderSearch = () => {
   const { searchWord, setSearchWord, setResults } = useSearchStore();
   const [functionData, setFunctionData] = useState([]);
 
+  //검색결과초기화
+  useEffect(() => {
+    setSearchWord("");
+  }, [setSearchWord]);
+
   function goBack() {
     router.back();
   }
-
-  // const togResult = (e) => {
-  //   e.preventDefault();
-  //   if (searchWord) {
-  //     setResults([searchWord]);
-  //     router.push("/search2");
-  //   }
-  // };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -188,7 +185,6 @@ const HeaderSearch = () => {
         className={headerStyle.goBackBtn1}
         onClick={goBack}
       ></button>
-      {/* <form onSubmit={togResult}> */}
       <form onSubmit={handleSearch}>
         <input
           type="text"
@@ -212,24 +208,10 @@ const HeaderSearch2 = () => {
     router.back();
   }
 
-  // const togResult = (e) => {
-  //   e.preventDefault();
-  //   if (searchWord) {
-  //     setResults([searchWord]);
-  //     router.push("/search2");
-  //   }
-  // };
-
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchWord !== "") {
       setResults([searchWord]);
-
-      // const data = await fn.search(searchWord, 1);
-      // console.log(data);
-      // setFunctionData(data);
-      // console.log(functionData);
-
       router.push(`/search2?query=${searchWord}`);
     }
   };
@@ -258,64 +240,8 @@ const HeaderSearch2 = () => {
           name="searchWord"
           value={searchWord}
           onChange={handle}
-          // onChange={(e) => setSearchWord(e.target.value)}
           placeholder="공연명을 검색하세요."
         ></input>
-        <button type="submit"></button>
-      </form>
-    </div>
-  );
-};
-
-const HeaderSearch3 = () => {
-  const router = useRouter();
-  const { searchWord, setSearchWord, setResults } = useSearchStore();
-
-  const goBack = () => {
-    setSearchWord("");
-    router.back();
-  };
-
-  const togResult = (e) => {
-    e.preventDefault();
-    if (searchWord) {
-      setResults([searchWord]);
-      router.push("/search2");
-    }
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchWord(value);
-
-    if (value.trim() === "") {
-      setTimeout(() => {
-        router.push("/search");
-      }, 0);
-    }
-  };
-
-  useEffect(() => {
-    if (!searchWord.trim()) {
-      router.push("/search");
-    }
-  }, [searchWord, router]);
-
-  return (
-    <div className={headerStyle.searchWrap}>
-      <button
-        type="button"
-        className={headerStyle.goBackBtn1}
-        onClick={goBack}
-      ></button>
-      <form onSubmit={togResult}>
-        <input
-          type="text"
-          name="searchWord"
-          value={searchWord}
-          onChange={handleChange}
-          placeholder="티켓명, 아티스트명을 검색하세요."
-        />
         <button type="submit"></button>
       </form>
     </div>

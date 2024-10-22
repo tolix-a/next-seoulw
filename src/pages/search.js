@@ -1,7 +1,6 @@
 // 3. 검색
 import React, { useEffect, useState } from 'react'
 import searchStyle from '@/styles/search.module.scss'
-import Link from 'next/link';
 import useSearchStore from '../store/search_store';
 import { useRouter } from 'next/router';
 
@@ -36,11 +35,10 @@ function Search() {
   const pClick = (value) => {
     setSearchWord(value);
 
-     // 현재 results에서 value를 가져오는 과정
-  const newResults = results.map(result => result.value); // 현재 결과의 value 배열
+  
+  const newResults = results.map(result => result.value);
   newResults.push(value); // 클릭한 검색어 추가
 
-  console.log('New Results to Set:', newResults); // 디버깅 로그 추가
   setResults(newResults); // 새로운 결과 설정
 
     router.push(`/search2?query=${value}`);

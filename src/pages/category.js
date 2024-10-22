@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import categoryStyle from "@/styles/category.module.scss";
 import Card from "@/components/Card";
 import GenresTapBar from "@/components/GenresTapBar";
-import axios from "axios";
-import { handler } from "../pages/api/api";
 import { fn } from "@/utils/apiFunc";
 import Loading from "@/components/Loading";
 import movePageStore from "../store/movePage_store";
@@ -38,8 +36,8 @@ function Category() {
   const tab = (i) => {
     setAll(i);
     setPage(1); // 탭을 변경할 때 페이지를 초기화
-    setFunctionData([]); // 데이터를 초기화
-    setHasMore(true); // 더 가져올 데이터가 있다고 설정
+    setFunctionData([]);
+    setHasMore(true); 
   };
   const handleGenreClick = (genreIndex) => {
     setClickedGenre(genreIndex);
@@ -78,7 +76,7 @@ function Category() {
     } else {
       setFunctionData((prevData) => [...prevData, ...data]);
     }
-    setIsLoading(false); // 로딩 상태 종료
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -133,7 +131,6 @@ function Category() {
           onClick={() => tab(2)}
         >
           <button>이번주</button>
-          {/* <button onClick={handleThisWeek}>이번주</button> */}
           <div></div>
         </li>
         <li
