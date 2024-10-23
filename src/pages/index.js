@@ -302,7 +302,7 @@ export default function Main() {
               setClickedGenre={setClickedGenre1}
             />
           </div>
-          <div className={mainStyle.swiperWrap}>
+          <div className={`basicSlideCommon ${mainStyle.swiperWrap}`}>
             <BasicSwiper
               dataArr={thisWeekExtractedData}
               clickedGenre={clickedGenre1}
@@ -351,7 +351,7 @@ export default function Main() {
               setClickedGenre={setClickedGenre3}
             />
           </div>
-          <div className={mainStyle.swiperWrap}>
+          <div className={`basicSlideCommon ${mainStyle.swiperWrap}`}>
             <BasicSwiper
               dataArr={genresExtractedData}
               clickedGenre={clickedGenre3}

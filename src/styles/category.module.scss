@@ -11,7 +11,7 @@
    }
    >ul{
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       border-bottom: 1px solid #CBCBCB;
       padding: 0 20px;
       margin-top: 41px;
@@ -22,7 +22,7 @@
             color: black;
          }
          div{
-            width: 95px;
+            width: 100%;
             padding-top: 11px;
          }
       }
@@ -45,6 +45,14 @@
          grid-template-columns: repeat(2, 1fr);
          grid-gap: 20px;
          padding: 0 20px;
+         .card_cardWrap{
+            width: 100%;
+            figure{
+               imgWrap{
+                  width: 100%;
+               }
+            }
+         }
       }
       .nogongyeon{
          font-size: 24px;

@@ -58,6 +58,16 @@
         width: auto !important; 
       }
     }
+    .basicSlideCommon{
+      .swiper-slide {
+        width: 45% !important; 
+      }
+    }
+    .performSlide{
+      .swiper-slide {
+        width: calc(30%) !important; 
+      }
+    }
   }
   footer{
   }

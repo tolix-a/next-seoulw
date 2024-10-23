@@ -153,7 +153,7 @@ function Category() {
         {all === 1 && functionData.length !== 0 && (
           <div className={categoryStyle.grid}>
             {functionData.map((item, i) => (
-              <Card key={i} item={item} />
+              <Card key={i} item={item}/>
             ))}
           </div>
         )}

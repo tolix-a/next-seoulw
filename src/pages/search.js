@@ -81,11 +81,12 @@ function Search() {
       <section>
       { recentPerformances!== null && recentPerformances.length > 0 ? (
         <Swiper
-        slidesPerView={3}
+        slidesPerView={'auto'}
         spaceBetween={24}
-        freeMode={true}
-        modules={[FreeMode]}
-        className="mySwiper"
+        // freeMode={true}
+        // modules={[FreeMode]}
+        // className="mySwiper"
+        className={`performSlide`}
         >
           {recentPerformances.slice().reverse().map((performance,i) => (
             <SwiperSlide key={i}>
@@ -95,11 +96,7 @@ function Search() {
                   <p>{performance.genrem}</p>
                   <figcaption>({performance.prfnm})</figcaption>
                 </div>
-                <button onClick={() => 
-                  {
-                    console.log('Performance object:', performance);
-                    console.log('Removing performance with mt20id:', performance.mt20id);
-                    remove2(performance.mt20id)}}>
+                <button onClick={() => {remove2(performance.mt20id)}}>
                     <img src='./assets/icons/x_button.svg'/></button>
               </figure>
             </SwiperSlide>
