@@ -23,7 +23,7 @@ function getThisWeekDate() {
 let { stdate, eddate } = getThisWeekDate();
 
 //api 관련 기본 변수
-const API_KEY = "7b1ab9ea464e4d70ad4c8bad7505f532";
+const API_KEY = process.env.NEXT_PUBLIC_KOPIS_API_KEY;
 const defaultParams = {
   service: API_KEY,
   rows: "20", //요청개수

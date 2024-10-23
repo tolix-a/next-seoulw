@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import searchStyle from '@/styles/search.module.scss'
 import useSearchStore from '../store/search_store';
 import Card from '@/components/Card';
@@ -21,8 +21,9 @@ function Search2() {
 console.log(b);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  const loadMoreRef = useRef(null);
 
   useEffect(() => {
     setPage(1);
@@ -32,9 +33,11 @@ console.log(b);
 
   const handleSearch = async (pageNum) => {
     setLoading(true);
-    const data = await fn.search(b, pageNum);
+    let data = await fn.search(b, pageNum);
 
-    if (data.length === 0) {
+    console.log(data);
+
+    if (data.titleData.length === 0) {
       setHasMore(false);
     } else {
       setFunctionData((prevData) => ({
@@ -52,24 +55,44 @@ console.log(b);
   }, [page,query]);
 
   
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     // if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
+  //     // setPage((prevPage) => prevPage + 1);
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop >=
+  //         document.documentElement.offsetHeight &&
+  //       hasMore
+  //     ) {
+  //       setPage((prevPage) => prevPage + 1);
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [hasMore]);
+  
   useEffect(() => {
-    const handleScroll = () => {
-      // if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) return;
-      // setPage((prevPage) => prevPage + 1);
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight &&
-        hasMore
-      ) {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+
+      if (entry.isIntersecting && hasMore && !loading && functionData.titleData.length > 0) {
         setPage((prevPage) => prevPage + 1);
       }
-    };
-    window.addEventListener('scroll', handleScroll);
+    });
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
     };
-  }, [hasMore]);
-  
+  }, [hasMore, loading, functionData.titleData]);
+
   console.log(functionData)
 
 
@@ -103,6 +126,10 @@ console.log(b);
           </> 
         ) : ''
       }
+
+      {/* <div ref={loadMoreRef} style={{ height: '30px' }} /> */}
+      {hasMore && <div ref={loadMoreRef} style={{ height: '20px' }} />}
+
       <TopButton/>
     </div>
   )

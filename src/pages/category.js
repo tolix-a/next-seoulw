@@ -1,5 +1,5 @@
 // 2. 카테고리
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import categoryStyle from "@/styles/category.module.scss";
 import Card from "@/components/Card";
 import GenresTapBar from "@/components/GenresTapBar";
@@ -15,7 +15,6 @@ function Category() {
 
   // [↓] 여기변경 =============
   const { movePageData, setMovePageData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
-
   // [↑] 여기변경 =============
 
   const genreMapping = [
@@ -32,6 +31,8 @@ function Category() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+
+  const loadMoreRef = useRef(null);
 
   const tab = (i) => {
     setAll(i);
@@ -92,20 +93,24 @@ function Category() {
   }, [page, clickedGenre, all]); // all 상태도 의존성에 추가
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight &&
-        hasMore
-      ) {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      
+      if (entry.isIntersecting && hasMore && !isLoading) {
         setPage((prevPage) => prevPage + 1);
       }
+    });
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return ()=>{
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMore]);
+  }, [hasMore, isLoading]);
 
   // if(!data.length) return<></>;
 
@@ -186,7 +191,9 @@ function Category() {
             ? "공연이 없습니다."
             : ""}
         </p>
+      <div ref={loadMoreRef} style={{ height: '30px' }} />
       </section>
+
       <TopButton/>
     </div>
   );

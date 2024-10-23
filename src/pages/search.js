@@ -83,9 +83,6 @@ function Search() {
         <Swiper
         slidesPerView={'auto'}
         spaceBetween={24}
-        // freeMode={true}
-        // modules={[FreeMode]}
-        // className="mySwiper"
         className={`performSlide`}
         >
           {recentPerformances.slice().reverse().map((performance,i) => (
