@@ -17,11 +17,10 @@ function Search2() {
   const { query } = router.query;
   const searchWord = useSearchParams()
   let b = searchWord.get('query')
-console.log(b);
+
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
-
   const loadMoreRef = useRef(null);
 
   useEffect(() => {
@@ -34,8 +33,6 @@ console.log(b);
     setLoading(true);
     let data = await fn.search(b, pageNum);
 
-    console.log(data);
-
     if (!data.titleData) {
       setHasMore(false);
     } else {
@@ -44,7 +41,6 @@ console.log(b);
         // venueData: [...prevData.venueData, ...(data.venueData || [])]
       }));
     }
-
     setLoading(false);
   };
   
@@ -52,7 +48,7 @@ console.log(b);
   useEffect(() => {
     handleSearch(page);
   }, [page,query]);
-
+  
   
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

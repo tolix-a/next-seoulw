@@ -68,12 +68,15 @@
     }
     .myPage {
       &::after {
-        // width: 32px;
-        // height: 32px;
-        // display: block;
         content: "";
-        background: url("../../public/assets/icons/person.svg") center
-          no-repeat;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("../../public/assets/icons/person.svg");
+      }
+      &.login{
+        &::after{
+          background-image: url("../../public/assets/icons/profile_pink.svg");
+        }
       }
     }    
   }

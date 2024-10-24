@@ -22,14 +22,6 @@ export default function App({
     setMainData();
   }, []);
 
-  // console.log(`mainData: `);
-  // console.log(mainData);
-  // console.log("=================================");
-
-  //genres 짝수는 뮤지컬, 홀수는 제멋대로같음?????(클래식같음 api.js에서도 섞여서 들어옴)
-  //ing 짝수 대중음악, 홀수 서커스/마술
-  //thisWeek 짝수 연극, 홀수 국악
-  //upcoming 짝수 무용, 홀수 복합
 
   return mainData.length === 0 ? (
     <Loading />

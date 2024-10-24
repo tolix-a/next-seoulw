@@ -16,23 +16,11 @@ import { useEffect, useState } from "react";
 import mainStore from "../store/main_store";
 import movePageStore from "../store/movePage_store";
 
-// [↓] 메인 관련 코드 시작================================================
-// import { useSearchParams } from 'next/navigation'
 
-// const query = useSearchParams() //전역에 선언해 주세요
-//useEffect 짧은 코드가 페이지 첫 진입할때 실행하는거 같아요
-//그 안에 하단 코드 넣어주세요
-//if(!query) {
-//   const queryGenre = query.get('genre') // GGGA
-//   const queryAll = query.get('all') // 1, 2, 3, 4
-// } else {
-//   **원래 useEffect안에 있던 코드**
-// }
-// [↑] 메인 관련 코드 종료=================================================
 
 export default function Main() {
   const { mainData } = mainStore();
-  const { movePageData, setMovePageData } = movePageStore();
+  const { categoryStoreData, setCategoryStoreData } = movePageStore();
   const [clickedGenre1, setClickedGenre1] = useState(0);
   const [clickedGenre2, setClickedGenre2] = useState(0);
   const [clickedGenre3, setClickedGenre3] = useState(0);
@@ -187,7 +175,8 @@ export default function Main() {
       poster: "/assets/images/poster_03.jpg",
     },
   ];
-  // 리뷰 인덱스
+
+  // 리뷰 3개씩 랜덤 추출
   const [reviewIdx, setReviewIdx] = useState(0); // 0~6(마지막값+)
   const getRandomReviewIdx = () => {
     const randomNumber = Math.floor(
@@ -196,18 +185,22 @@ export default function Main() {
     return randomNumber;
   };
 
+
+// 디테일 페이지로 이동하는 함수
   const moveToDetailPage = (mt20id) => {
     router.push(`/detail?mt20id=${mt20id}`);
   };
 
+
+// 카테고리 페이지로 이동하는 함수
   const moveToCategoryPage = (genreIdx, allIdx) => {
-    setMovePageData(genreIdx, allIdx); //store저장
+    setCategoryStoreData(genreIdx, allIdx); //store에 [선택한 장르, all] 저장
     router.push(`/category`);
     //all 1전체 2이번주 3공연중 4공연예정
   };
-  console.log(movePageData);
+  
 
-  // 전체보기 버튼 클릭시 router.push('/category?genre=GGGA&all=1')
+
 
   return (
     <div className={mainStyle.mainWrap}>
@@ -391,8 +384,6 @@ export default function Main() {
 
 // 전체 보기 버튼
 const ViewAll = ({ moveToCategoryPage, genreIdx, allIdx }) => {
-  // console.log(genreIdx);
-  // console.log(`viewAll: ${allIdx}`);
 
   return (
     <button
@@ -406,7 +397,6 @@ const ViewAll = ({ moveToCategoryPage, genreIdx, allIdx }) => {
 
 // 기본 스와이퍼
 const BasicSwiper = ({ dataArr, clickedGenre }) => {
-  // let realDataArr = Object.values(dataArr[clickedGenre])[0]
   return (
     <Swiper
       slidesPerView={"auto"}
@@ -423,9 +413,7 @@ const BasicSwiper = ({ dataArr, clickedGenre }) => {
 };
 
 // 리스트 스와이퍼 (공연 예정)
-const ListSwiper = ({ dataArr, clickedGenre, moveToDetailPage }) => {
-  // let realDataArr = Object.values(dataArr[clickedGenre])[0]
-
+const ListSwiper = ({ dataArr, moveToDetailPage }) => {
   let groupDataArr = [];
 
   for (let i = 0; i < dataArr.length; i += 3) {
@@ -442,14 +430,12 @@ const ListSwiper = ({ dataArr, clickedGenre, moveToDetailPage }) => {
     const group = dataArr.slice(i, i + 3);
 
     if (group.length < 3) {
-      while (group.length === 3) {
+      while (group.length < 3) {
         group.push(emptyItem);
       }
     }
     groupDataArr.push(group);
   }
-
-  // console.log(groupDataArr);
 
   return (
     <Swiper
@@ -476,7 +462,6 @@ const ListSwiper = ({ dataArr, clickedGenre, moveToDetailPage }) => {
 
 // 작은 카드 (공연 예정)
 const SmallCard = ({ item, moveToDetailPage }) => {
-  // const [isVisible, setIsVisible] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const likeToggle = () => {
     setIsActive((prev) => !prev);

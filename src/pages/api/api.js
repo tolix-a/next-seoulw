@@ -203,7 +203,7 @@ async function apiDetail(mt20id, res) {
   let detail = xmlTOjson(detailResult.data);
   // console.log(detailResult.data);
 
-  console.log(detail);
+  
 
 
   let placeId = detail.mt10id._text;
@@ -213,7 +213,7 @@ async function apiDetail(mt20id, res) {
     { params: { service: API_KEY } }
   );
   let detailMap = xmlTOjson(detailMapResult.data);
-
+  console.log(detailMap);
   res.json({ detail, detailMap });
 }
 

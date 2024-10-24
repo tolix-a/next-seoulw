@@ -4,7 +4,6 @@ import categoryStyle from "@/styles/category.module.scss";
 import Card from "@/components/Card";
 import GenresTapBar from "@/components/GenresTapBar";
 import { fn } from "@/utils/apiFunc";
-import Loading from "@/components/Loading";
 import movePageStore from "../store/movePage_store";
 
 function Category() {
@@ -13,9 +12,9 @@ function Category() {
   const [functionData, setFunctionData] = useState([]);
 
   // [↓] 여기변경 =============
-  const { movePageData, setMovePageData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
+  const { categoryStoreData, setCategoryStoreData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
   // [↑] 여기변경 =============
-
+  console.log(categoryStoreData);
   const genreMapping = [
     "GGGA",
     "AAAA",
@@ -37,11 +36,12 @@ function Category() {
     setAll(i);
     setPage(1); // 탭을 변경할 때 페이지를 초기화
     setFunctionData([]);
-    setHasMore(true); 
+    setHasMore(true);
   };
+
   const handleGenreClick = (genreIndex) => {
     setClickedGenre(genreIndex);
-    setMovePageData(() => genreMapping[genreIndex]); //여기변경 =============
+    setCategoryStoreData(genreIndex, 1); //여기변경 =============
     setAll(1); // 전체 탭으로 설정
     setPage(1); // 페이지 초기화
     setFunctionData([]); // 데이터 초기화
@@ -80,21 +80,21 @@ function Category() {
   };
 
   useEffect(() => {
-    //[↓] 여기변경 =============
-    if (!movePageData.length) {
-      setClickedGenre(() => movePageData[0]);
-      setAll(() => movePageData[1]);
-      loadMoreData(page);
-    } else {
-      loadMoreData(page); //원래 있던 코드
-    }
-    //[↑] 여기변경 =============
+    setCategoryStoreData(clickedGenre, all); //store저장
+    loadMoreData(page); //원래 있던 코드
   }, [page, clickedGenre, all]); // all 상태도 의존성에 추가
+
+  // 메인에서 카테고리 진입 시 장르, all 변경
+  useEffect(() => {
+    setClickedGenre(categoryStoreData[0]);
+    setAll(categoryStoreData[1]);
+  }, []);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      
+
       if (entry.isIntersecting && hasMore && !isLoading) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -104,14 +104,12 @@ function Category() {
       observer.observe(loadMoreRef.current);
     }
 
-    return ()=>{
+    return () => {
       if (loadMoreRef.current) {
         observer.unobserve(loadMoreRef.current);
       }
     };
   }, [hasMore, isLoading]);
-
-  // if(!data.length) return<></>;
 
   return (
     <div className={`categoryCommon ${categoryStyle.category}`}>
@@ -157,7 +155,7 @@ function Category() {
         {all === 1 && functionData.length !== 0 && (
           <div className={categoryStyle.grid}>
             {functionData.map((item, i) => (
-              <Card key={i} item={item}/>
+              <Card key={i} item={item} />
             ))}
           </div>
         )}
@@ -190,9 +188,8 @@ function Category() {
             ? "공연이 없습니다."
             : ""}
         </p>
-      <div ref={loadMoreRef} style={{ height: '30px' }} />
+        <div ref={loadMoreRef} style={{ height: "30px" }} />
       </section>
-
     </div>
   );
 }

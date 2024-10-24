@@ -38,10 +38,12 @@ const Map = ({ info }) => {
       <div className={MapStyle.map}>
         <h2>장소</h2>
         <div className={MapStyle.mapinfo}>
-          <p>{info.fcltynm}</p>
-          <p>{info.adres}</p>
+          {/* <p>{info.fcltynm}</p>
+          <p>{info.adres}</p> */}
+          <p>{Object.keys(info.fcltynm).length > 0 && info.fcltynm}</p>
+          <p>{Object.keys(info.adres).length > 0 && info.adres}</p>
           <div className={MapStyle.mapnum}>
-            <p>{info.telno}</p>
+            <p>{Object.keys(info.telno).length > 0 && info.telno}</p>
             {info.detailMap && info.detailMap.relateurl ? (
               <Link
                 href={info.detailMap.relateurl}

@@ -4,19 +4,19 @@ import { useRouter } from "next/router";
 import useSearchStore from "@/store/search_store";
 // import { useSearchParams } from 'next/navigation'
 import movePageStore from "../store/movePage_store";
+import { useSession } from "next-auth/react";
 
 function Header() {
-  const { movePageData, moveDetailData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
+  const { categoryStoreData, detailStoreData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
   const [header, setHeader] = useState();
   const router = useRouter();
-  // const genresArr = ['뮤지컬', '연극', '대중음악', '무용', '클래식', '국악', '서커스/마술', '기타'];
-
-  // setSubName(() => genresArr[movePageData[0]])
+  const { data: session } = useSession(); //로그인 유무 체크용
 
   const movePage = (page) => {
     router.push(page);
   };
 
+  // 카테고리 페이지 헤더
   const onCategory = () => {
     const genresArr = [
       "뮤지컬",
@@ -28,17 +28,21 @@ function Header() {
       "서커스/마술",
       "기타",
     ];
-    setHeader(() => <HeaderSub name={genresArr[movePageData[0]]} />);
+    setHeader(() => <HeaderSub name={genresArr[categoryStoreData[0]]} />);
   };
 
+  // 디테일 페이지 헤더
   const onDetail = () => {
-    setHeader(() => <HeaderDetail name={moveDetailData} />);
+    setHeader(() => <HeaderDetail name={detailStoreData.title} />);
   };
 
+  // 페이지에 맞는 헤더로 변경
   useEffect(() => {
     switch (router.pathname) {
       case "/":
-        setHeader(() => <HeaderMain movePage={movePage} hide={false} />);
+        setHeader(() => (
+          <HeaderMain movePage={movePage} hide={false} session={session} />
+        ));
         break;
       case "/category":
         onCategory();
@@ -69,13 +73,20 @@ function Header() {
         break;
       case "/login":
       case "/join":
-        setHeader(() => <HeaderMain movePage={movePage} hide={true} />);
+        if (session) {
+          movePage("/mypage");
+        }
+        setHeader(() => (
+          <HeaderMain movePage={movePage} hide={true} session={session} />
+        ));
         break;
       default:
-        setHeader(() => <HeaderMain movePage={movePage} hide={false} />);
+        setHeader(() => (
+          <HeaderMain movePage={movePage} hide={false} session={session} />
+        ));
         break;
     }
-  }, [router.pathname]);
+  }, [router.pathname, categoryStoreData, detailStoreData, session]);
 
   return <header>{header}</header>;
 }
@@ -103,7 +114,7 @@ const GoBackBtn = () => {
 };
 
 // 메인 헤더
-const HeaderMain = ({ movePage, hide }) => {
+const HeaderMain = ({ movePage, hide, session }) => {
   return (
     <div
       className={`${headerStyle.mainHeaderWrap} ${
@@ -118,9 +129,11 @@ const HeaderMain = ({ movePage, hide }) => {
           className={headerStyle.search}
         ></button>
         <button
-          onClick={() => movePage("/mypage")}
+          onClick={() => movePage("/login")}
           type="button"
-          className={headerStyle.myPage}
+          className={`${headerStyle.myPage} ${
+            session ? headerStyle.login : ""
+          }`}
         ></button>
       </div>
     </div>

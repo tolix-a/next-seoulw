@@ -5,7 +5,7 @@ function bookpage() {
   return (
     <div className={bookpStyle.bookpage}>
       <div>
-        <p>47<span>/50</span></p>
+        <p>6<span>/50</span></p>
         <button>전체 삭제</button>
       </div>
 

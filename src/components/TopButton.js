@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const TopButton = () => {
 
@@ -33,7 +34,7 @@ const TopButton = () => {
 
 
     return (
-        <button 
+      <button 
         onClick={scrollToTop} 
         style={{
           display: isVisible ? 'block' : 'none',
@@ -43,7 +44,7 @@ const TopButton = () => {
           width: '50px',
           height: '50px',
           padding: '10px',
-          zIndex: '3',
+          zIndex: '99',
           fontSize:'1.2rem',
           backgroundColor:'rgb(255,75,119)',
           color: '#fff',
@@ -51,7 +52,8 @@ const TopButton = () => {
           cursor: 'pointer',
         }}
       >
-        ↑
+        {/* ↑ */}
+        <Image src="/assets/icons/arrow_top_white.svg" alt="탑 버튼" width={20} height={20}  style={{ width: '20px', height: '20px' }}/>
       </button>
   )
 }

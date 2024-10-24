@@ -3,15 +3,15 @@ import { create } from "zustand";
 
 const useMovePageStore = create((set) => ({
   //카테고리 페이지
-  movePageData: [0,1],
-  setMovePageData: (genre, all) => {
-    set({ movePageData: [genre, all] });
+  categoryStoreData: [0, 1],
+  setCategoryStoreData: (genre, all) => {
+    set({ categoryStoreData: [genre, all] });
   },
-
+  
   //디테일 페이지
-  moveDetailData: "", //오브젝트로 변경
-  setMoveDetailData: (title) => {
-    set({ moveDetailData: title });   //제목 외 공연state정보, 예매주소 쓰게
+  detailStoreData: {}, //오브젝트로 변경
+  setDetailStoreData: (title, prfstate, link) => {
+    set({ detailStoreData: { title, prfstate, link } }); //제목 외 공연state정보, 예매주소 쓰게
   },
 }));
 

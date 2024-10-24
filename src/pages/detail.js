@@ -12,12 +12,6 @@ import movePageStore from "../store/movePage_store";
 import useSearchStore from "@/store/search_store";
 import { useRouter } from "next/router";
 
-// [↓] const Detail 내부
-// const {setMoveDetailData} = movePageStore();   //movePageData=[장르인덱스, all인덱스]
-// setMoveDetailData(() => item.mt20id)
-
-// var parseString = require("xml2js").parseString;
-
 function Detail() {
   // 탭 메뉴
   const [all, setAll] = useState(1);
@@ -25,7 +19,7 @@ function Detail() {
   const params = useSearchParams();
   const id = params.get("mt20id");
 
-  const { setMoveDetailData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
+  const { setDetailStoreData } = movePageStore(); //movePageData=[장르인덱스, all인덱스]
 
   // _text 분리 코드
   useEffect(() => {
@@ -38,8 +32,18 @@ function Detail() {
       for (let key in d.detailMap) {
         if (d.detailMap[key]._text) d.detailMap[key] = d.detailMap[key]._text;
       }
+
       setInfo(d);
-      setMoveDetailData(d.detail.prfnm);
+
+      //예약링크 추출
+      let reservationUrl = d.detail.relates.relate.relateurl
+        ? d.detail.relates.relate.relateurl._text
+        : Array.isArray(d.detail.relates.relate) //url 여러개일때
+        ? d.detail.relates.relate[0].relateurl._text //첫번째 값만 사용
+        : "#";
+
+      //store에 공연 정보 저장
+      setDetailStoreData(d.detail.prfnm, d.detail.prfstate, reservationUrl);
     });
   }, []);
 
@@ -63,8 +67,6 @@ function Detail() {
     }
   }, [mt20id, info, setRecentPerformance]);
   //------------------------------------------
-
-  // console.log(info.prfnm);
 
   const tap = (i) => {
     setAll(i);
@@ -114,7 +116,10 @@ function Detail() {
           <img className={detailStyle.headerposter} src={info.detail.poster} />
           <h1>{info.detail.prfnm}</h1>
           <ul>
-            <li>{info.detail.prfage}</li>
+            <li>
+              {Object.keys(info.detail.prfage).length > 0 && info.detail.prfage}
+              {/* {info.detail.prfage} */}
+            </li>
             <li>
               <img src="/assets/icons/map.svg" />
               {info.detail.fcltynm}
@@ -124,14 +129,20 @@ function Detail() {
               {info.detail.prfpdfrom} ~ {info.detail.prfpdto}
               {/* 끝나는 날짜 코드로 가져오기 */}
             </li>
-            <li>
+            <li className={detailStyle.dtguidance}>
               {/* 해당 값은 통으로 들어오고 코드로 가져오기 */}
               <img src="/assets/icons/watch.svg" />
-              {info.detail.dtguidance}
+              {/* {info.detail.dtguidance} */}
+              <div className={detailStyle.dtguidanceText}>
+                {Object.keys(info.detail.dtguidance).length > 0 &&
+                  info.detail.dtguidance}
+              </div>
             </li>
             <li>
               <img src="/assets/icons/runnigtime.svg" />
-              {info.detail.prfruntime}
+              {/* {info.detail.prfruntime} */}
+              {Object.keys(info.detail.prfruntime).length > 0 &&
+                info.detail.prfruntime}
             </li>
           </ul>
         </div>
@@ -167,21 +178,34 @@ function Detail() {
                 {/* 공연 정보 */}
                 <ul>
                   <li className={detailStyle.infotitle}>공연정보</li>
-                  <li>{info.detail.genrenm}</li>
+                  {/* <li>{info.detail.genrenm}</li> */}
+                  <li>
+                    {Object.keys(info.detail.genrenm).length > 0 &&
+                      info.detail.genrenm}
+                  </li>
                 </ul>
                 {/* 캐스팅 리스트 */}
                 <ul className={detailStyle.cast}>
                   <li className={detailStyle.infotitle}>캐스팅</li>
-                  <li>{info.detail.prfcast}</li>
+                  <li>
+                    {Object.keys(info.detail.prfcast).length > 0 &&
+                      info.detail.prfcast}
+                  </li>
                 </ul>
                 {/* 가격 */}
                 <ul className={detailStyle.place}>
                   <li className={detailStyle.infotitle}>가격</li>
-                  <li>{info.detail.pcseguidance}</li>
+                  {/* <li>{info.detail.pcseguidance}</li> */}
+                  <li>
+                    {Object.keys(info.detail.pcseguidance).length > 0 &&
+                      info.detail.pcseguidance}
+                  </li>
                 </ul>
                 <img
                   src={
-                    info.detail.styurls.styurl?._text || info.detail.styurl || info.detail.poster
+                    info.detail.styurls.styurl?._text ||
+                    info.detail.styurl ||
+                    info.detail.poster
                     // info.detail.styurls.styurl ? info.detail.styurls.styurl : (info.detail.styurl ? info.detail.styurl : info.detail.poster)
                   }
                 />
@@ -194,7 +218,11 @@ function Detail() {
                     <p>{info.detailMap.fcltynm}</p>
                     <p>{info.detailMap.adres}</p>
                     <div className={detailStyle.mapnum}>
-                      <p>{info.detailMap.telno}</p>
+                      <p>
+                        {Object.keys(info.detailMap.telno).length > 0 &&
+                          info.detailMap.telno}
+                      </p>
+                      {/* <p>{info.detailMap.telno}</p> */}
                       {info.detailMap.relateurl && (
                         <Link
                           href={info.detailMap.relateurl}

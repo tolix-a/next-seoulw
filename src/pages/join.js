@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import joinStyle from '@/styles/join.module.scss';
 import { useRouter } from 'next/router';
@@ -14,13 +14,25 @@ function Join() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [emailChecked, setEmailChecked] = useState(false); // 이메일 중복 체크 상태
-
+    const [isEmailValid, setIsEmailValid] = useState(false); // 이메일 형식 체크 상태
+   
     const router = useRouter();
+
+
+    // 이메일 형식 유효성 검사
+    useEffect(() => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 정규식
+        setIsEmailValid(emailRegex.test(email)); // 이메일 형식이 맞으면 true
+    }, [email]);
 
     // 이메일 중복 체크
     const checkEmailDuplicate = async () => { 
         if (!email) {
             setError("이메일을 입력해 주세요.");
+            return;
+        }
+        if (!isEmailValid) {
+            setError("올바른 이메일 형식을 입력해 주세요.");
             return;
         }
         try {
@@ -104,7 +116,7 @@ function Join() {
                 {error && <div style={{color: 'red', margin: '10px 0'}}>{error}</div>}
                 <div className={joinStyle.loginrow}>
                     <Logininput type="email" msg="아이디"  value={email} setValue={setEmail} />
-                    <button type="button" onClick={checkEmailDuplicate} className={emailChecked ? joinStyle.active : joinStyle.checkBtn}>중복 체크</button>
+                    <button type="button" onClick={checkEmailDuplicate} className={emailChecked ? joinStyle.active : joinStyle.checkBtn} >중복 체크</button>
                 </div>
                 <Logininput type="password" msg="비밀번호 (영문/숫자/특수문자 조합 8~15자)" value={password} setValue={setPassword} />
                 <Logininput type="password" msg="비밀번호 확인"  value={confirmPassword} setValue={setConfirmPassword} />
