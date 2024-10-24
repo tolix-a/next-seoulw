@@ -6,7 +6,6 @@ import GenresTapBar from "@/components/GenresTapBar";
 import { fn } from "@/utils/apiFunc";
 import Loading from "@/components/Loading";
 import movePageStore from "../store/movePage_store";
-import TopButton from "@/components/TopButton";
 
 function Category() {
   const [all, setAll] = useState(1);
@@ -194,7 +193,6 @@ function Category() {
       <div ref={loadMoreRef} style={{ height: '30px' }} />
       </section>
 
-      <TopButton/>
     </div>
   );
 }
