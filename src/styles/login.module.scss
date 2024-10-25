@@ -11,7 +11,11 @@
         position: absolute;
         top: -4%; 
         right: 7%;
-     }  
+        z-index: 99;
+    }
+    .goToMainLogo{
+        margin: 0 auto 12px;
+    }
     h2{
         font-size: 32px;
         font-weight: 600;
@@ -88,7 +92,7 @@
     justify-content: center;
     margin-top: 40px;
     caret-color: transparent; 
-        a:not(:nth-of-type(3))::after{
+        a:not(:last-of-type)::after{
             content: ' | ';
             padding: 0 10px;
             font-size: 14px;
@@ -99,11 +103,15 @@
     .loginicon{
         display: flex;
         justify-content: center;
+        margin-top: 20px;
         button{
             width: 54px;
             height: 54px;
             border-radius: 99px;
-            margin: 20px 24px 0 0;
+            // margin: 20px 24px 0 0;
+            &:not(:last-of-type){
+                margin-right: 24px;
+            }
             img{
                 width: 55%;
                 height: auto;

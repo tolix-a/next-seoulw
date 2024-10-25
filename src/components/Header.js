@@ -80,6 +80,9 @@ function Header() {
           <HeaderMain movePage={movePage} hide={true} session={session} />
         ));
         break;
+      case "/policy":   
+        setHeader(() => <HeaderSub name={"서울더블유 약관"} />);
+        break;
       default:
         setHeader(() => (
           <HeaderMain movePage={movePage} hide={false} session={session} />

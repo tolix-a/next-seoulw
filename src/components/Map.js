@@ -6,8 +6,9 @@ const Map = ({ info }) => {
   // console.log(info, "=============map");
   useEffect(() => {
     const kakaoMapScript = document.createElement("script");
+    const appKey = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
     kakaoMapScript.async = false;
-    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8f7e7e4b1f07adeff4054fb9568a0f&autoload=false`;
+    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&autoload=false`;
     document.head.appendChild(kakaoMapScript);
 
     const onLoadKakaoAPI = () => {
@@ -55,7 +56,7 @@ const Map = ({ info }) => {
           </div>
         </div>
       </div>
-      <div id="map" style={{ width: "100%", height: "350px", paddingBottom:"50px" }}></div>
+      <div id="map" style={{ width: "100%", height: "350px", paddingBottom:"50px", marginBottom:"80px" }}></div>
     </>
   );
 };

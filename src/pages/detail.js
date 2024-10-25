@@ -11,6 +11,8 @@ import movePageStore from "../store/movePage_store";
 
 import useSearchStore from "@/store/search_store";
 import { useRouter } from "next/router";
+import Bookmark from "@/pages/bookmark";
+import Heart from "@/components/Heart";
 
 function Detail() {
   // 탭 메뉴
@@ -72,40 +74,6 @@ function Detail() {
     setAll(i);
   };
 
-  // parseString(itemXML, function (err, result) {
-  //   detail = result.dbs.db;
-  // });
-
-  //하단의 공연 예매 버튼
-  // useEffect(() => {
-  //   switch (status) {
-  //     case 'reserved':
-  //       setButtonText('예약하기');
-  //       break;
-  //     case 'completed':
-  //       setButtonText('공연완료');
-  //       break;
-  //     case 'upcoming':
-  //       setButtonText('공연예정');
-  //       break;
-  //     default:
-  //       setButtonText('예약하기'); // 기본값
-  //   }
-  // }, [status]);
-
-  //리뷰 별점
-
-  // const ARRAY = [0, 1, 2, 3, 4];
-  // const [score, setScore] = useState([false, false, false, false, false]);
-
-  // const starScore = (index) => {
-  //   let star = [...score];
-  //   for (let i = 0; i < 5; i++) {
-  //     star[i] = i <= index ? true : false;
-  //   }
-  //   setScore(star);
-  // };
-
   if (!info) return <></>;
 
   return (
@@ -138,12 +106,24 @@ function Detail() {
                   info.detail.dtguidance}
               </div>
             </li>
-            <li>
-              <img src="/assets/icons/runnigtime.svg" />
-              {/* {info.detail.prfruntime} */}
-              {Object.keys(info.detail.prfruntime).length > 0 &&
-                info.detail.prfruntime}
-            </li>
+            <div className={detailStyle.heart}>
+              <li>
+                <img src="/assets/icons/runnigtime.svg" />
+                {/* {info.detail.prfruntime} */}
+                {Object.keys(info.detail.prfruntime).length > 0 &&
+                  info.detail.prfruntime}
+              </li>
+              {/* 하트(북마크)컴포넌트에 디테일들에 대한 정보를 보내줌 */}
+              <Heart
+                performanceDetails={{
+                  mt20id: info.detail.mt20id,
+                  genrem: info.detail.genrenm,
+                  poster: info.detail.poster,
+                  prfnm: info.detail.prfnm,
+                }}
+                isBookmarked={()=>{}}
+              />
+            </div>
           </ul>
         </div>
 

@@ -3,24 +3,52 @@ import axios from "axios";
 import { xmlTOjson } from "@/utils/apiFunc";
 var convert = require("xml-js");
 
-/** thisweek용 시작일, 종료일 구하기 */
-function getThisWeekDate() {
-  function dateFormat(date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
-    const dd = String(date.getDate()).padStart(2, "0");
-    return `${yyyy}${mm}${dd}`;
-  }
+const today = new Date();
+const realToday = dateFormat(today);
 
-  const today = new Date();
+/**날짜 형식 바꾸는 함수 */
+function dateFormat(date) {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}${mm}${dd}`;
+}
+
+/** thisweek용 시작일, 종료일 구하기 */
+function getThisWeekDate(today) {
   const dayIndex = today.getDay(); // 0: 일요일, 1: 월요일, ..., 6: 토요일
   const endDate = new Date(today); // stdate 복사
   endDate.setDate(today.getDate() + (7 - dayIndex));
-  const stdate = dateFormat(today);
   const eddate = dateFormat(endDate);
-  return { stdate, eddate };
+  return eddate;
 }
-let { stdate, eddate } = getThisWeekDate();
+let eddateThisWeek = getThisWeekDate(today);
+
+/** 공연중 시작일 어제*/
+function getYesterday(date) {
+  const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 1);
+    return newDate;
+}
+const yesterday = dateFormat(getYesterday(today)); 
+
+/** 내일 */
+function getTomorrow(today) {
+  const newDate = new Date(today);
+  newDate.setDate(today.getDate() + 1);
+  return newDate;
+}
+const tomorrow = getTomorrow(today);
+const realTomorrow = dateFormat(tomorrow);
+
+/** 장르 전체 1년후 종료일*/
+function addYear(date) {
+  const newDate = new Date(date);
+  newDate.setFullYear(newDate.getFullYear() + 1);
+  return newDate;
+}
+const aYearDate = dateFormat(addYear(tomorrow));
+
 
 //api 관련 기본 변수
 const API_KEY = process.env.NEXT_PUBLIC_KOPIS_API_KEY;
@@ -28,15 +56,30 @@ const defaultParams = {
   service: API_KEY,
   rows: "20", //요청개수
   signgucode: "11",
-  stdate: "20240101",
-  eddate: "20241231",
+  stdate: yesterday,
+  eddate: aYearDate,
 };
+
 const thisWeekParams = {
   service: API_KEY,
   rows: "20",
   signgucode: "11",
-  stdate: stdate,
-  eddate: eddate,
+  stdate: realToday,
+  eddate: eddateThisWeek,
+};
+const ingParams = {
+  service: API_KEY,
+  rows: "20",
+  signgucode: "11",
+  stdate: yesterday,
+  eddate: realToday,
+};
+const upcomingParams = {
+  service: API_KEY,
+  rows: "20",
+  signgucode: "11",
+  stdate: realTomorrow,
+  eddate: aYearDate,
 };
 
 const instance = axios.create({
@@ -63,8 +106,8 @@ async function apiMain(res) {
       service: API_KEY,
       rows: "20", //요청개수
       signgucode: "11",
-      stdate: "20240101",
-      eddate: "20241231",
+      stdate: yesterday,
+      eddate: aYearDate,
       cpage: 1,
       shcate: shcate,
     };
@@ -72,8 +115,17 @@ async function apiMain(res) {
       service: API_KEY,
       rows: "20", //요청개수
       signgucode: "11",
-      stdate: stdate,
-      eddate: eddate,
+      stdate: realToday,
+      eddate: eddateThisWeek,
+      cpage: 1,
+      shcate: shcate,
+    };
+    const mainUpcomingParams = {
+      service: API_KEY,
+      rows: "20", //요청개수
+      signgucode: "11",
+      stdate: realTomorrow,
+      eddate: aYearDate,
       cpage: 1,
       shcate: shcate,
     };
@@ -85,7 +137,7 @@ async function apiMain(res) {
     ); //이번주
     requests.upcoming.push(
       axios.get("http://www.kopis.or.kr/openApi/restful/pblprfr", {
-        params: { ...mainParams, prfstate: "01" },
+        params: { ...mainUpcomingParams, prfstate: "01" },
       })
     ); //공연예정
     requests.genres.push(
@@ -113,32 +165,6 @@ async function apiMain(res) {
     response.genres.push(xmlTOjson(result.data));
   });
 
-  // [↓] 원래 코드 ==========================================================================
-  // results를 각각의 배열에 맞게 분류
-  // results.forEach((result, index) => {
-  //   if (result && result.data) {
-  //     console.log(`Response ${index}: Success`);
-  //   } else {
-  //     console.log(`Response ${index}: Failed or No Data`);
-  //   }
-
-  //   // 각 요청이 어떤 키에 해당하는지 계산
-  //   const genreIndex = Math.floor(index / 3); // 장르 요청의 인덱스
-  //   const requestTypeIndex = index % 3; // 요청 타입의 인덱스
-  //   // console.log(`${index}: 장르번호:${genreIndex}  | 넷중:${requestTypeIndex}`);
-
-  //   const genreLabel = genreParams[genreIndex].label; // 장르 라벨
-  //   const typeLabel = ['thisWeek', 'upcoming', 'genres'][requestTypeIndex]; // 요청 타입 라벨
-
-  //   if (result.data !== null) {
-  //     let dataGenre = xmlTOjson(result.data)
-  //     response[typeLabel].push({ [genreLabel]: dataGenre }); // 성공 시 데이터 추가
-  //   } else {
-  //     response[typeLabel].push({ [genreLabel]: null }); // 실패 시 null 추가
-  //   }
-  // });
-  // [↑] 원래 코드 끝 ========================================================================
-
   res.json(response);
 }
 // [↑] 메인(store) 종료=======================================================================================
@@ -163,14 +189,14 @@ async function apiThisWeek(shcate, cpage, res) {
 // 공연중(장르 1개)
 async function apiIng(shcate, cpage, res) {
   const dataIng = await instance.get("", {
-    params: { cpage: `${cpage}`, shcate: `${shcate}`, prfstate: "02" },
+    params: { ...ingParams, cpage: `${cpage}`, shcate: `${shcate}`, prfstate: "02" },
   }); //뮤지컬 GGGA
   res.json(xmlTOjson(dataIng.data));
 }
 // 공연예정(장르 1개)
 async function apiUpcoming(shcate, cpage, res) {
   const dataUpcoming = await instance.get("", {
-    params: { cpage: `${cpage}`, shcate: `${shcate}`, prfstate: "01" },
+    params: { ...upcomingParams, cpage: `${cpage}`, shcate: `${shcate}`, prfstate: "01" },
   }); //뮤지컬 GGGA
   res.json(xmlTOjson(dataUpcoming.data));
 }
@@ -179,12 +205,19 @@ async function apiUpcoming(shcate, cpage, res) {
 
 // [↓] 서치 시작=====================================================================
 async function apiSearch(searchWord, cpage, res) {
+  const searchParams = {
+    service: API_KEY,
+    rows: "20",
+    signgucode: "11",
+    stdate: "20140101",
+    eddate: aYearDate,
+  };
   // let encodedWord = encodeURIComponent(searchWord);
   let title = await instance.get("", {
-    params: { cpage: `${cpage}`, shprfnm: `${searchWord}` },
+    params: { ...searchParams, cpage: `${cpage}`, shprfnm: `${searchWord}` },
   });
   let venue = await instance.get("", {
-    params: { cpage: `${cpage}`, shprfnmfct: `${searchWord}` },
+    params: { ...searchParams, cpage: `${cpage}`, shprfnmfct: `${searchWord}` },
   });
 
   let titleData = xmlTOjson(title.data);

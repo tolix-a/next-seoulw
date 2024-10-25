@@ -4,7 +4,6 @@
   // 위에 헤더 부분
   .header {
     .headerposter {
-     
       margin-bottom: 46.6px;
       width: 480px;
       height: 670px;
@@ -18,12 +17,17 @@
     ul {
       margin: 0 20px;
       font-size: 16px;
+      .heart {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+      }
       li {
         margin-bottom: 16px;
         &:nth-of-type(1) {
           font-size: 14px;
         }
-        &.dtguidance{
+        &.dtguidance {
           display: flex;
           align-items: center;
         }
@@ -200,3 +204,10 @@
     }
   }
 }
+
+// @media (max-width: 480px) {
+
+//   .headerposter {
+//    width: 100%;
+//   }
+// }

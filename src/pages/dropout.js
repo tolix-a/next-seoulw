@@ -89,7 +89,7 @@ const Dropout = () => {
   return (
     <div className={dropoutStyle.dropoutwrap}>
         <p>{session?.user?.name || "사용자"}님 <i>정보가 모두 사라져요!</i></p>
-        <div className={dropoutStyle.dropbox} id={dropoutStyle.box1}><b>북마크</b><span>50<i>개</i></span></div>
+        <div className={dropoutStyle.dropbox} id={dropoutStyle.box1}><b>북마크</b><span>20<i>개</i></span></div>
         <div className={dropoutStyle.dropbox}><b>리뷰</b><span>1,024<i>개</i></span></div>
         <div className={dropoutStyle.dropinfo}>
         <p><em></em>꼭 확인해 주세요!</p>

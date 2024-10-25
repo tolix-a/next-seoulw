@@ -69,6 +69,9 @@ const MenuTapBar = () => {
         if (session) {
           movePage("/mypage");
         }
+      case "/policy":
+        setIsActive(() => 0);
+        break;
       default:
         setIsActive(() => 0);
         break;

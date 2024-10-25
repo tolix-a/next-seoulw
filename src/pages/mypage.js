@@ -34,7 +34,7 @@ function Mypage() {
             <Link href="/edit">회원정보 수정</Link>
           </li>
           <li>
-            <Link href="/bookpage">북마크</Link>
+            <Link href="/bookmark">북마크</Link>
           </li>
           <li>
             <Link href="/review">나의 리뷰</Link>

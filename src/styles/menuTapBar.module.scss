@@ -7,11 +7,12 @@
     .reserveButtonWrap{
         max-width: 480px;
         height: 100%;
-        padding: 8px 20px;
+        padding: 12px 20px;
         margin: 0 auto;
+        box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.1);
         .reserveButton {
             width: 100%;
-            padding: 10px 20px; // 버튼 패딩
+            padding: 12px 20px; // 버튼 패딩
             font-size: 16px; // 버튼 폰트 크기
             color: #fff; // 글자 색상
             background-color: #ff4b77; // 버튼 배경색

@@ -1,0 +1,48 @@
+{
+  "short_name": "Seoul, W",
+  "name": "Seoul, W",
+  "icons": [
+    {
+      "src": "/assets/icons/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "id": "/",
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#FF4B77",
+  "shortcuts": [
+    {
+      "name": "Search",
+      "short_name": "Search",
+      "description": "Search cultural events and performances in Seoul",
+      "url": "/search",
+      "icons": [{ "src": "/assets/icons/icon_192.png", "sizes": "192x192" }]
+    }
+  ],
+  "description": "Cultural events and performances in Seoul",
+  "screenshots": [
+    {
+      "src": "/assets/images/main.png",
+      "type": "image/png",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/images/main_wide.png",
+      "type": "image/png",
+      "sizes": "720x540",
+      "form_factor": "wide"
+    }
+  ]
+}
+  
+  

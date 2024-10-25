@@ -19,6 +19,7 @@ export const fn = {
     let res = await axios.get(
       `/api/api?type=apiGenre&shcate=${shcate}&cpage=${cpage}`
     );
+    console.log(shcate, cpage);
     return res.data;
   },
 

@@ -6,10 +6,10 @@ function Card({ item }) {
   const router = useRouter();
 
   let isPerform = item.prfstate._text;
-  const [isActive, setIsActive] = useState(false);
-  const likeToggle = () => {
-    setIsActive((prev) => !prev);
-  };
+  // const [isActive, setIsActive] = useState(false);
+  // const likeToggle = () => {
+  //   setIsActive((prev) => !prev);
+  // };
 
   const moveToDetailPage = (mt20id) => {
     router.push(`/detail?mt20id=${mt20id}`);
@@ -23,11 +23,11 @@ function Card({ item }) {
       <figure>
         <div className={cardStyle.imgWrap}>
           <img src={item.poster._text} alt={item.prfnm._text} />
-          <button
+          {/* <button
             onClick={likeToggle}
             className={`${cardStyle.like} ${isActive ? cardStyle.active : ""}`}
             type="button"
-          ></button>
+          ></button> */}
         </div>
         <figcaption className={cardStyle.imgDescription}>
           <span

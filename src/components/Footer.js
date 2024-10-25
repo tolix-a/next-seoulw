@@ -21,8 +21,8 @@ function Footer() {
     <footer className={footerStyle.footer}>
       <div>
         <ul className={footerStyle.policy}>
-          <li><Link href='#'>이용 약관</Link></li>
-          <li><Link href='#'>개인 정보 처리 방침</Link></li>
+          <li><Link href='/policy'>이용약관</Link></li>
+          <li><Link href='/policy'>개인정보처리방침</Link></li>
         </ul>
       </div>
 
@@ -37,6 +37,8 @@ function Footer() {
           <li>사업자 등록 번호: 123 45 67890</li>
           <li>통신 판매업 신고 번호: 제 2024 서울 강남 12345호</li>
           <li>고객 센터: 02-455-6678</li>
+          <li>이 사이트는 Next.js를 이용해 학습용으로 제작되었습니다.</li>
+          <li>This site was created for educational purposes using Next.js.</li>
         </ul>
       </div>
 

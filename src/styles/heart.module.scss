@@ -1,0 +1,23 @@
+.like {
+    position: relative; // position 속성 추가
+    &::after {
+        width: 24px;
+        height: 24px;
+        display: block;
+        content: "";
+        position: absolute;
+        top: 1px; /* 상단 여백 조정 */
+        right: 8px; /* 우측 여백 조정 */
+        background-image: url("../../public/assets/icons/heart.svg"); // 기본 하트 이미지
+        background-size: cover; // 이미지 크기 조정
+    }
+    &.bookmark {
+        
+    }
+    // 추가적인 스타일 조정이 필요할 수 있습니다
+    &.active {
+        &::after {
+            background-image: url("../../public/assets/icons/heart_pink.svg"); // 클릭 시 하트 이미지 변경
+        }
+    }
+}
