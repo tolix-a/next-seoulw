@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 const useMovePageStore = create((set) => ({
   //카테고리 페이지
-  categoryStoreData: [],
+  categoryStoreData: [0,1],
   setCategoryStoreData: (genre, all) => {
     set({ categoryStoreData: [genre, all] });
   },
