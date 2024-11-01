@@ -28,10 +28,13 @@
   
    | 이름   | GitHub                              | 담당              |
    |--------|---------------------------------------|-------------------|
-   | 고유나 | [tolix-a](https://github.com/tolix-a) | 기능개발, API     |
-   | 박지연 | [pjiyeon90](https://github.com/pjiyeon90) | 디자인, 로그인    |
+   | 고유나 | [tolix-a](https://github.com/tolix-a) | 기능개발, API     | 
+   | 박지연 | [pjiyeon90](https://github.com/pjiyeon90) | 디자인, 로그인    | 
    | 성주영 | [0011git](https://github.com/0011git) | 기획              |
    | 허다영 | [Pon119](https://github.com/Pon119) | 서버관리, 배포    |
+
+#### 맡은 부분
+- API, 카테고리 페이지, 검색 페이지
 
 ## 📚 참고 URL
 - 기획서 : 
@@ -71,9 +74,7 @@
 
 ## 트러블슈팅
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 검색 
 
 ## 📱 스크린샷
 ![t](https://github.com/user-attachments/assets/dd46735e-4f07-4ab9-9eb6-7377388ddaa3)
