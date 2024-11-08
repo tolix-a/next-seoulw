@@ -55,6 +55,10 @@ const MenuTapBar = () => {
         setIsActive(() => 2);
         break;
       case "/mypage":
+      case "/edit":
+      case "/bookmark":
+      case "/myreview":
+      case "/dropout":
         setIsActive(() => 3);
         break;
       case "/detail":

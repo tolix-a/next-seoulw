@@ -202,7 +202,7 @@ export default function Main() {
 
 
 
-  return (
+  return   (
     <div className={mainStyle.mainWrap}>
       {/* 비주얼 */}
       <section className={`mainVisualCommon ${mainStyle.visual}`}>

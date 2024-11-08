@@ -36,7 +36,9 @@ function Category() {
     setAll(i);
     setPage(1); // 탭을 변경할 때 페이지를 초기화
     setFunctionData([]);
-    setHasMore(true);
+    // setHasMore(true);
+
+    loadMoreData(1);
   };
 
   const handleGenreClick = (genreIndex) => {
@@ -45,7 +47,9 @@ function Category() {
     setAll(1); // 전체 탭으로 설정
     setPage(1); // 페이지 초기화
     setFunctionData([]); // 데이터 초기화
-    setHasMore(true); // 더 가져올 데이터가 있다고 설정
+    // setHasMore(true); // 더 가져올 데이터가 있다고 설정
+
+    loadMoreData(1);
   };
 
   const loadMoreData = async (pageNumber) => {
@@ -98,6 +102,7 @@ function Category() {
 
 
   useEffect(() => {
+    console.log(hasMore);
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
 

@@ -1,6 +1,7 @@
 // 디테일 페이지 scss
 
 .container {
+  margin-top: 80px;
   // 위에 헤더 부분
   .header {
     .headerposter {
@@ -24,7 +25,8 @@
       }
       li {
         margin-bottom: 16px;
-        &:nth-of-type(1) {
+        // &:nth-of-type(1) {
+        &.age{
           font-size: 14px;
         }
         &.dtguidance {

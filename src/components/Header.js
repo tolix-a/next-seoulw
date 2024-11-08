@@ -62,7 +62,7 @@ function Header() {
       case "/edit":
         setHeader(() => <HeaderSub name={"회원 정보 수정"} />);
         break;
-      case "/review":
+      case "/myreview":
         setHeader(() => <HeaderSub name={"나의 리뷰"} />);
         break;
       case "/bookmark":

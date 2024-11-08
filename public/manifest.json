@@ -3,12 +3,12 @@
   "name": "Seoul, W",
   "icons": [
     {
-      "src": "/assets/icons/icon_512.png",
+      "src": "/assets/images/icon_512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "/assets/icons/icon_192.png",
+      "src": "/assets/images/icon_192.png",
       "type": "image/png",
       "sizes": "192x192"
     }
@@ -25,7 +25,7 @@
       "short_name": "Search",
       "description": "Search cultural events and performances in Seoul",
       "url": "/search",
-      "icons": [{ "src": "/assets/icons/icon_192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/images/icon_192.png", "sizes": "192x192" }]
     }
   ],
   "description": "Cultural events and performances in Seoul",

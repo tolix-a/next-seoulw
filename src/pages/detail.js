@@ -84,7 +84,7 @@ function Detail() {
           <img className={detailStyle.headerposter} src={info.detail.poster} />
           <h1>{info.detail.prfnm}</h1>
           <ul>
-            <li>
+            <li className={detailStyle.age}>
               {Object.keys(info.detail.prfage).length > 0 && info.detail.prfage}
               {/* {info.detail.prfage} */}
             </li>

@@ -20,4 +20,4 @@ const nextConfigFunction = async (phase) => {
 
 };
 
-export default nextConfig;
+export default nextConfigFunction;

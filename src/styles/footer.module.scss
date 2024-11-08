@@ -13,6 +13,7 @@
             li{
                 color: inherit;
                 font-size: 12px;
+                cursor: pointer;
                 &:not(:last-of-type){
                     &::after{
                         color: #6F6F6F;
@@ -58,9 +59,14 @@
             &.unfold{
                 display: block;
             }
-            li{
-                color:#8E8E8E;
-                font-size: 12px;
+            ul{
+                &.notice{
+                    margin-top: 16px;
+                }
+                li{
+                    color:#8E8E8E;
+                    font-size: 12px;
+                }
             }
         }
     }
