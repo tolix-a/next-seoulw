@@ -36,7 +36,7 @@
          height: 110px;
       }
       @media ( min-height: 701px) and (max-height: 740px) {
-         height: 130px;
+         height: 140px;
       }
       li{
          padding-top: 20px;
@@ -66,6 +66,9 @@
             padding-top: 45px;
             font-size: 18px;
             color: #A4A4A4;
+            @media (max-height: 700px) {
+               padding-top: 30px;
+            }
          }
       }
    }
@@ -118,6 +121,9 @@
             padding-top: 45px;
             font-size: 18px;
             color: #A4A4A4;
+            @media (max-height: 700px) {
+               padding-top: 30px;
+            }
          }
       }
    }
