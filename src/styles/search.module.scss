@@ -9,8 +9,14 @@
 } */
 
 .search{
-   margin-top: 110px;
+   padding-top: 100px;
    overflow: hidden;
+   @media (max-height: 700px) {
+      padding-top: 85px;
+   }
+   @media ( min-height: 701px) and (max-height: 740px) {
+         padding-top: 90px;
+      }
    h2{
       font-size: 24px;
       font-weight: bold;
@@ -23,8 +29,15 @@
    }
    >ul{
       gap: 26px;
+      // height: 158px;
       height: 158px;
       padding-left: 20px;
+      @media (max-height: 700px) {
+         height: 110px;
+      }
+      @media ( min-height: 701px) and (max-height: 740px) {
+         height: 130px;
+      }
       li{
          padding-top: 20px;
          position: relative;
